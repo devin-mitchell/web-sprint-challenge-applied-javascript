@@ -20,6 +20,8 @@ const Header = (titleP, dateP, tempP) => {
   title.textContent = titleP
   temp.textContent = tempP
 
+  return header;
+}
   // TASK 1
   // ---------------------
   // Implement this function taking `title`, `date` and `temp` as its 3 args and returning the markup below.
@@ -32,18 +34,18 @@ const Header = (titleP, dateP, tempP) => {
   //    <span class="temp">{ temp }</span>
   //  </div>
   //
-  return header;
-}
+
 
 const headerAppender = (selector) => {
   const appendee = document.querySelector(selector)
   appendee.appendChild(Header('Lambda Times', 'JANUARY 6, 2021', "26°"))
+}
+
   // TASK 2
   // ---------------------
   // Implement this function taking a css selector as its only argument.
   // It should create a header using the Header component above, passing arguments of your choosing.
   // It should append the header to the element in the DOM that matches the given selector.
   //
-}
 
 export { Header, headerAppender }

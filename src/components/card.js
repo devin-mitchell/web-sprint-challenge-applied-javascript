@@ -1,4 +1,38 @@
+import axios from "axios"
+
 const Card = (article) => {
+//instantiate
+const card = document.createElement('div')
+const headline = document.createElement('div')
+const author = document.createElement('div')
+const imgContainer = document.createElement('div')
+const image  = document.createElement('img')
+const authorName = document.createElement('span')
+
+//structure
+card.appendChild(headline)
+card.appendChild(author)
+author.appendChild(imgContainer)
+author.appendChild(authorName)
+imgContainer.appendChild(image)
+
+//class
+card.classList.add('card')
+headline.classList.add('headline')
+author.classList.add('author')
+imgContainer.classList.add('img-container')
+
+//textContent
+headline.textContent = article.headline
+image.src = article.authorPhoto
+authorName.textContent = article.authorName
+
+card.addEventListener('click', (e) => {
+  console.log('task5----------->', headline.textContent)
+})
+
+return card;
+}
   // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
@@ -17,9 +51,21 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
-}
+
 
 const cardAppender = (selector) => {
+  axios.get(`https://lambda-times-api.herokuapp.com/articles`)
+  .then(res => {
+    const articlesArr = res.data.articles.javascript
+    const appendee = document.querySelector(selector)
+    articlesArr.forEach((article) => {
+      appendee.appendChild(Card(article))
+    })
+  })
+  .catch(err => {
+    console.log('error')
+  })
+}
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
@@ -28,6 +74,6 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
-}
+
 
 export { Card, cardAppender }
